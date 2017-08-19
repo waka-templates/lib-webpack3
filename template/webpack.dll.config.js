@@ -9,7 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         'common': [
-            'react','classnames','react-motion','react-dom','invariant','warning','babel-polyfill','rabjs/router','react-router','reduce-reducers',
+            'react','classnames','react-dom','invariant','warning','babel-polyfill','rabjs/router','react-router','reduce-reducers',
             'react-router-redux','redux','react-redux','rabjs'
         ]
     },
