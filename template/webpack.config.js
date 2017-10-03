@@ -5,6 +5,7 @@ const {
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -23,11 +24,10 @@ module.exports = {
 
     devServer: {
         contentBase: [path.join(__dirname,'demo'), path.join(__dirname, 'dist')],
-        compress: true,
+        overlay: true,
         port: {{port}},
         host: '0.0.0.0',
         hot: true,
-        inline: true,
         publicPath: '/dist/',
         headers: {
             'XM-Component-Server': 'webpack-dev-server@2.0.0'
@@ -135,11 +135,12 @@ module.exports = {
             inject:false
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.ModuleConcatenationPlugin(){{#webpackDll}},
+        new webpack.optimize.ModuleConcatenationPlugin(),{{#webpackDll}}
         new webpack.DllReferencePlugin({
             context: path.join(__dirname, "demo", "dll"),
             context: __dirname,
             manifest: require("./demo/dll/manifest.json")
-        }){{/webpackDll}}
-    ]
+        }),{{/webpackDll}}
+        new FriendlyErrorsPlugin()
+        ]
 };
